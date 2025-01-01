@@ -21,3 +21,9 @@ pip install -r requirements.txt
 ```
 python3 -m backend.blockchain.block
 ```
+
+**Run a test**
+
+```
+python3 -m pytest backend/tests
+```

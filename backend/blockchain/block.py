@@ -1,6 +1,13 @@
 import time
 from backend.util.cryto_hash import crypto_hash
 
+GENESIS_DATA = {
+    'timestamp' : 1,
+    'last_hash' : 'genesis_last_hash',
+    'hash' : 'genesis_hash',
+    'data' : []
+}
+
 class Block:
     """
     A block is a unit of storage
@@ -39,7 +46,12 @@ class Block:
         """
         This is the first block of the blockchain and generally a bunch of hardcoded fields
         """
-        return Block(1, 'genesis_last_hash', 'genesis_hash', [])
+        return Block(
+            GENESIS_DATA['timestamp'],
+            GENESIS_DATA['last_hash'],
+            GENESIS_DATA['hash'],
+            GENESIS_DATA['data']
+        )
 
 def main():
     genesis_block = Block.genesis()
