@@ -26,5 +26,5 @@ def main():
     blockchain.add_block('Block2')
     print(blockchain)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
