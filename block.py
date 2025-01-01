@@ -1,22 +1,6 @@
 import time
 
-def mine_block(last_block, data):
-    """
-    Creating a block is called mining and involves solving a computing challenge
-    We need the previous block reference to get value of last_hash
-    @returns a new block
-    """
-    # defining params for new block
-    timestamp = time.time_ns()
-    last_hash = last_block.hash
-    hash = f'{timestamp}-{last_hash}'
-    return Block(timestamp=timestamp, last_hash=last_hash, hash=hash,data=data)
 
-def genesis():
-    """
-    This is the first block of the blockchain and generally a bunch of hardcoded fields
-    """
-    return Block(1, 'genesis_last_hash', 'genesis_hash', [])
 
 class Block:
     """
@@ -38,14 +22,32 @@ class Block:
             ')'
         )
     
+    @staticmethod
+    def mine_block(last_block, data):
+        """
+        Creating a block is called mining and involves solving a computing challenge
+        We need the previous block reference to get value of last_hash
+        @returns a new block
+        """
+        # defining params for new block
+        timestamp = time.time_ns()
+        last_hash = last_block.hash
+        hash = f'{timestamp}-{last_hash}'
+        return Block(timestamp=timestamp, last_hash=last_hash, hash=hash,data=data)
+
+    @staticmethod
+    def genesis():
+        """
+        This is the first block of the blockchain and generally a bunch of hardcoded fields
+        """
+        return Block(1, 'genesis_last_hash', 'genesis_hash', [])
 
 def main():
-    genesis_block = genesis()
+    genesis_block = Block.genesis()
     # creating a new block
-    block = mine_block(genesis_block, 'foo')
-    block2 = mine_block(block, 'foo1')
+    block = Block.mine_block(genesis_block, 'foo')
     print(block)
-    print(block2)
+
 
 if __name__=="__main__":
     main()
