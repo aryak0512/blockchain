@@ -92,6 +92,28 @@ class Block:
             return last_block.difficulty - 1 
         
         return 1
+    
+    @staticmethod
+    def is_valid_block(old_block, block):
+        """
+        Matches the hash computed by the fields with the hash in the block
+        and
+        Matches the old_hash of current block with hash of last_bloc
+        and
+        Must have proper proof of work [trailing 0's equal to difficuly]
+        and
+        Difficultly must only differ by +_ 1 unit
+        """
+        if old_block.hash == block.last_hash:
+            if block.hash[0:block.difficulty] == '0'* block.difficulty:
+                if abs(old_block.difficulty - block.difficulty) == 1:
+                    hash_computed = crypto_hash(block.timestamp, block.last_hash, block.data, block.difficulty, block.nonce)
+                    if hash_computed==block.hash:
+                        return True
+                    return False
+                return False
+            return False
+        return False
 
 def main():
     genesis_block = Block.genesis()
