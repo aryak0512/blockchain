@@ -16,3 +16,4 @@ def test_mine_block():
     block = Block.mine_block(Block.genesis(), data)
     assert block.data == data
     assert block.last_hash == GENESIS_DATA['hash']
+    assert block.hash[0:block.difficulty] == '0'*block.difficulty
