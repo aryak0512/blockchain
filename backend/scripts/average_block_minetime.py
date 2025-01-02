@@ -6,7 +6,7 @@ from backend.config import SECOND
 
 times = []
 blockchain = Blockchain()
-for i in range(100):
+for i in range(1000):
     t1 = time.time_ns()
     blockchain.add_block(i)
     t2 = time.time_ns()

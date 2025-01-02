@@ -1,6 +1,7 @@
 import time
 from backend.util.cryto_hash import crypto_hash
 from backend.config import MINE_RATE
+from backend.util.hex_to_binary_conversion import hex_to_binary
 
 GENESIS_DATA = {
     'timestamp' : 1,
@@ -51,14 +52,18 @@ class Block:
         difficulty = Block.adjust_difficulty(last_block=last_block, timestamp=timestamp)
         nonce = 0
         hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
+        binary_hash = hex_to_binary(hash)
+        
+
         # till the leading number of 0's is not equal to the difficulty
-        while hash[0:difficulty] != '0' * difficulty:
+        while binary_hash[0:difficulty] != '0' * difficulty:
             nonce+=1
             timestamp = time.time_ns()
             difficulty = Block.adjust_difficulty(last_block=last_block, timestamp=timestamp)
             hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
+            binary_hash = hex_to_binary(hash)
 
-        return Block(timestamp=timestamp, last_hash=last_hash, hash=hash,data=data, difficulty=difficulty, nonce=nonce)
+        return Block(timestamp=timestamp, last_hash=last_hash, hash=binary_hash,data=data, difficulty=difficulty, nonce=nonce)
 
     @staticmethod
     def genesis():
