@@ -7,7 +7,7 @@ GENESIS_DATA = {
     'last_hash' : 'genesis_last_hash',
     'hash' : 'genesis_hash',
     'data' : [],
-    'difficulty' : 4,
+    'difficulty' : 3,
     'nonce' : 1
 }
 
